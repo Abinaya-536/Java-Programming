@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class con16 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String room = sc.nextLine();
+        String season = sc.nextLine();
+        int nights = sc.nextInt();
+        sc.nextLine();
+        String tier = sc.nextLine();
+
+        double base = 0;
+        double mul = 1;
+        int ext = 0;
+        int loy = 0;
+        String up = "None";
+
+       
+        if(room.equals("Standard"))
+            base = 150;
+        else if(room.equals("Deluxe"))
+            base = 300;
+        else if(room.equals("Suite"))
+            base = 500;
+        else if(room.equals("Presidential"))
+            base = 1000;
+
+        
+        if(season.equals("Off-Peak"))
+            mul = 0.7;
+        else if(season.equals("Regular"))
+            mul = 1.0;
+        else if(season.equals("Peak"))
+            mul = 1.5;
+        else if(season.equals("Holiday"))
+            mul = 2.0;
+
+        
+        if(nights >=1 && nights <=4)
+            ext = 0;
+        else if(nights <=7)
+            ext = 5;
+        else if(nights <=14)
+            ext = 10;
+        else
+            ext = 20;
+
+     
+        if(tier.equals("None")){
+            loy = 0;
+            up = "None";
+        }
+        else if(tier.equals("Member")){
+            loy = 10;
+            up = "Free breakfast";
+        }
+        else if(tier.equals("Gold")){
+            loy = 15;
+            up = "Free breakfast and spa access";
+        }
+        else if(tier.equals("Platinum")){
+            loy = 20;
+            up = "Concierge service, airport transfer, and fine dining";
+        }
+
+        double rate = base * mul;
+        double nightRate = rate * (1 - ext/100.0) * (1 - loy/100.0);
+        double total = nightRate * nights;
+
+        System.out.println("Room Category: " + room);
+        System.out.println("Season: " + season);
+        System.out.println("Nights Booked: " + nights);
+        System.out.println("Loyalty Tier: " + tier);
+        System.out.println("Base Rate Per Night: $" + base);
+        System.out.println("Seasonal Multiplier: " + mul + "x");
+        System.out.println("Extended Stay Discount: " + ext + "%");
+        System.out.println("Loyalty Discount: " + loy + "%");
+        System.out.println("Nightly Rate: $" + nightRate);
+        System.out.println("Total Booking Cost: $" + total);
+        System.out.println("Complimentary Upgrades: " + up);
+
+    }
+}
